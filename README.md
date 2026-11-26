@@ -47,16 +47,16 @@ mvn clean verify -Dcucumber.filter.tags="@HappyPath"
    mvn serenity:aggregate
    ```
    Resultado general de los 3 escenarios especificados.
-   ![Resultados](evidencias/vista1.png)
+   ![Resultados](evidencias/vistas/vista1.png)
 2. **Test completados exitosamente**
-   ![Resultados](evidencias/vista3.png)
+   ![Resultados](evidencias/vistas/vista3.png)
 2. **Escenario 1 y 2: Agregar productos al carrito (carrito_new.feature)**
-   ![Resultados](evidencias/vista4.png)
-   ![Resultados](evidencias/vista6.png)
-   ![Resultados](evidencias/vista7.png)
+   ![Resultados](evidencias/vistas/vista4.png)
+   ![Resultados](evidencias/vistas/vista6.png)
+   ![Resultados](evidencias/vistas/vista7.png)
 3. **Escenario 3:  Comprar producto del carrito (compra_new.feature)**
-   ![Resultados](evidencias/vista5.png)
-   ![Resultados](evidencias/vista9.png)
+   ![Resultados](evidencias/vistas/vista5.png)
+   ![Resultados](evidencias/vistas/vista9.png)
 
 ## Evidencias
 
