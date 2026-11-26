@@ -1,6 +1,8 @@
-# demoblaze_web_serenity
+# EJERCICIO AUTOMATIZACIÓN WEB
 
-Automatización web de https://www.demoblaze.com/ con **Serenity BDD 4.0.0**, Screenplay y Cucumber (Gherkin), pensada para correr en **Google Chrome en macOS**.
+Realizado por: Lucely Rubi Mendoza Deza
+
+Automatización web de https://www.demoblaze.com/ con **Serenity BDD 4.0.0** (Cambiado en el pom.xml por problemas que se me presentaron en MAC), Screenplay y Cucumber (Gherkin).
 
 ## Escenarios incluidos
 
@@ -12,22 +14,8 @@ Automatización web de https://www.demoblaze.com/ con **Serenity BDD 4.0.0**, Sc
 
 No requieren usuario ni login: se navega como invitado en demoblaze.
 
-## Requisitos (macOS)
 
-1. **Java JDK 17**
-   ```bash
-   brew install openjdk@17
-   ```
-   Verificar: `java -version` (debe indicar 17).
-2. **Maven 3.8+**
-   ```bash
-   brew install maven
-   ```
-   Verificar: `mvn -version`.
-3. **Google Chrome** instalado en `/Applications`. Selenium Manager descarga el ChromeDriver compatible automáticamente (`autodownload = true` en `serenity.conf`), por lo que solo se necesita conexión a internet.
-4. Un IDE (IntelliJ IDEA) con el JDK 17 configurado como SDK del proyecto.
-
-## Versiones clave
+## Versiones necesarias
 
 | Componente | Versión |
 |---|---|
@@ -41,9 +29,8 @@ No requieren usuario ni login: se navega como invitado en demoblaze.
 Desde la carpeta raíz del proyecto, en la Terminal:
 
 ```bash
-mvn clean verify
+mvn clean verify o mvn serenity:aggregate
 ```
-
 Se abre Chrome (modo incógnito, maximizado), se ejecutan los 3 escenarios y al terminar se genera el reporte.
 
 Ejecutar solo un tag:
@@ -53,45 +40,47 @@ mvn clean verify -Dcucumber.filter.tags="@CarritoNew"
 mvn clean verify -Dcucumber.filter.tags="@CompraNew"
 mvn clean verify -Dcucumber.filter.tags="@HappyPath"
 ```
+## Reporte y resultados
 
-Ejecutar sin abrir ventana (headless):
-
-```bash
-mvn clean verify -Dheadless.mode=true
-```
-
-## Reporte Serenity
-
-Al finalizar `mvn clean verify`, abrir:
-
-```bash
-open target/site/serenity/index.html
-```
+1. **Test results**
+   ```bash
+   mvn serenity:aggregate
+   ```
+   Resultado general de los 3 escenarios especificados.
+   ![Resultados](evidencias/vista1.png)
+2. **Test completados exitosamente**
+   ![Resultados](evidencias/vista3.png)
+2. **Escenario 1 y 2: Agregar productos al carrito (carrito_new.feature)**
+   ![Resultados](evidencias/vista4.png)
+   ![Resultados](evidencias/vista6.png)
+   ![Resultados](evidencias/vista7.png)
+3. **Escenario 3:  Comprar producto del carrito (compra_new.feature)**
+   ![Resultados](evidencias/vista5.png)
+   ![Resultados](evidencias/vista9.png)
 
 ## Evidencias
 
-Cada escenario guarda capturas de pantalla (`Paso 1`, `Paso 2`, ...) en la carpeta `evidencias/<fecha>_<nombre del escenario>/`.
+Cada escenario guarda capturas de pantalla (`Paso 1`, `Paso 2`, ...) en la carpeta `evidencias`.
 
 ## Estructura del proyecto
 
 ```
 src
 ├── main/java/org/example
-│   ├── Pages        → UI: locators (Targets) de la página
-│   ├── Tasks        → acciones de negocio del actor (NavigateHome)
-│   ├── Questions    → validaciones (alerta, carrito, confirmación de compra)
-│   └── Utils        → Parameters, ScreenShot, WaitImplicitly, PreAndProsCondition (hooks)
+│   ├── Pages        
+│   ├── Tasks        
+│   ├── Questions   
+│   └── Utils        
 └── test
     ├── java/org/example
-    │   ├── RunnerTest.java       → runner (tags por defecto)
-    │   └── StepDefinitions       → pasos Gherkin
+    │   ├── RunnerTest.java 
+    │   └── StepDefinitions
     └── resources
-        ├── features              → archivos .feature
-        └── serenity.conf         → configuración de Chrome / Serenity
+        ├── features
+        └── serenity.conf
 ```
 
-## Problemas frecuentes en Mac
+## Problemas que presneté en mac
 
 - **`Unable to launch the chrome service` / versión de driver:** actualizar Chrome y volver a correr; Selenium Manager baja el driver correcto.
-- **macOS bloquea chromedriver ("no se puede verificar el desarrollador"):** Ajustes del Sistema → Privacidad y seguridad → *Permitir de todos modos*, o `xattr -d com.apple.quarantine <ruta del chromedriver>`.
-- **`release version 17 not supported`:** Maven usa otro JDK. Configurar `export JAVA_HOME=$(/usr/libexec/java_home -v 17)`.
+- Se tuvo que usar serenity en su versión 4 para correr el chrome drive en su versión de 158.
